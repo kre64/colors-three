@@ -1,6 +1,6 @@
 import React from "react";
 
-const Timer = () => {
+function Timer(props) {
 	return <h1>Timer</h1>;
 };
 

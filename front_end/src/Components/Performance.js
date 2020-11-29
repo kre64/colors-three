@@ -1,6 +1,6 @@
 import React from "react";
 
-const Performance = () => {
+function Performance(props) {
 	return <h1>Performance</h1>;
 };
 
