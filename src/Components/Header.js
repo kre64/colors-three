@@ -1,14 +1,25 @@
 import React from "react";
-import Performance from '../Components/Performance'
-import Timer from '../Components/Timer'
+import Performance from "./Performance";
+import Timer from "./Timer";
+import Container from "react-bootstrap/Container";
+import Row from "react-bootstrap/Row";
+import Col from "react-bootstrap/Col";
 
 const Header = (props) => {
 	return (
-		<nav className="navbar">
-			<span className="navbar-brand highlight-inverted">Colors Three</span>
-      <Timer />
-      <Performance />
-		</nav>
+		<Container fluid center className="centered">
+			<Row>
+				<Col xs={4}>
+					<span className="highlight-inverted">Colors Three</span>
+				</Col>
+				<Col xs={4}>
+					<Timer />
+				</Col>
+				<Col xs={4}>
+					<Performance />
+				</Col>
+			</Row>
+		</Container>
 	);
 };
 
