@@ -5,7 +5,7 @@ import Col from "react-bootstrap/Col";
 
 import GameButton from "../Components/GameButton";
 
-function GameBoard(props) {
+const GameBoard = (props) => {
 	return (
 		<Container fluid center className="centered">
 			<Row>

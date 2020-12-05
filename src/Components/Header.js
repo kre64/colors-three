@@ -2,7 +2,7 @@ import React from "react";
 import Performance from '../Components/Performance'
 import Timer from '../Components/Timer'
 
-function Header(props) {
+const Header = (props) => {
 	return (
 		<nav className="navbar">
 			<span className="navbar-brand highlight-inverted">Colors Three</span>
