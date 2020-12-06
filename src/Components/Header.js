@@ -1,11 +1,37 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 import Performance from "./Performance";
 import Timer from "./Timer";
 import Container from "react-bootstrap/Container";
 import Row from "react-bootstrap/Row";
 import Col from "react-bootstrap/Col";
 
-const Header = (props) => {
+const Header = ({ game }) => {
+	const [time, setTime] = useState("");
+	const [seconds, setSeconds] = useState(0);
+
+	useEffect(() => {
+		const timeout = setInterval(() => {
+			setSeconds((seconds) => seconds + 1);
+			let m = padTime(parseInt(seconds / 60));
+			let s = padTime(seconds % 60);
+			setTime(`${m}:${s}`);
+		}, 1000);
+
+		return () => {
+			clearInterval(timeout);
+		};
+	}, [seconds, time]);
+
+	const padTime = (time) => {
+		let timeString = time + "";
+
+		if (timeString.length < 2) {
+			return `0${timeString}`;
+		} else {
+			return timeString;
+		}
+	};
+
 	return (
 		<Container fluid center className="centered">
 			<Row>
@@ -13,10 +39,10 @@ const Header = (props) => {
 					<span className="highlight-inverted">Colors Three</span>
 				</Col>
 				<Col xs={4}>
-					<Timer />
+					{game ? <Timer time={time} /> : <Timer time={"⏱"} />}
 				</Col>
 				<Col xs={4}>
-					<Performance />
+					<Performance seconds={seconds}/>
 				</Col>
 			</Row>
 		</Container>
