@@ -1,11 +1,27 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 import Container from "react-bootstrap/Container";
 import Row from "react-bootstrap/Row";
 import Col from "react-bootstrap/Col";
 import Target from "./Target";
 import GameButton from "./GameButton";
 
-const GameBoard = (props) => {
+const GameBoard = ({ game }) => {
+	const [color, setColor] = useState(1);
+	const [time, setTime] = useState(3000);
+
+	const COLORS = [0, 1, 2];
+
+	useEffect(() => {
+		const timeout = setInterval(() => {
+			setColor(Math.floor(Math.random() * 3));
+			console.log(color)
+		}, time);
+
+		return () => {
+			clearInterval(timeout);
+		};
+	}, [color]);
+
 	return (
 		<Container fluid center className="centered">
 			<Row>
@@ -21,8 +37,8 @@ const GameBoard = (props) => {
 			</Row>
 			<hr></hr>
 			<Row>
-				<Col style={{display: 'flex', justifyContent: 'center'}}>
-					<Target />
+				<Col style={{ display: "flex", justifyContent: "center" }}>
+					{game ? <Target color={color} /> : ""}
 				</Col>
 			</Row>
 		</Container>
