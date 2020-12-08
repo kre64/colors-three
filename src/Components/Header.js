@@ -21,19 +21,7 @@ const Header = ({ game }) => {
 			return () => {
 				clearInterval(timeout);
 			};
-		} else {
-			console.log("game not live")
 		}
-		// const timeout = setInterval(() => {
-		// 	setSeconds((seconds) => seconds + 1);
-		// 	let m = padTime(parseInt(seconds / 60));
-		// 	let s = padTime(seconds % 60);
-		// 	setTime(`${m}:${s}`);
-		// }, 1000);
-
-		// return () => {
-		// 	clearInterval(timeout);
-		// };
 	}, [seconds, time, game]);
 
 	const padTime = (time) => {
