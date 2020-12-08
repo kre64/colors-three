@@ -12,15 +12,17 @@ const GameBoard = ({ game }) => {
 	const COLORS = [0, 1, 2];
 
 	useEffect(() => {
-		const timeout = setInterval(() => {
-			setColor(Math.floor(Math.random() * 3));
-			console.log(color)
-		}, time);
+		if (game) {
+			const timeout = setInterval(() => {
+				setColor(Math.floor(Math.random() * 3));
+				console.log(color);
+			}, time);
 
-		return () => {
-			clearInterval(timeout);
-		};
-	}, [color]);
+			return () => {
+				clearInterval(timeout);
+			};
+		}
+	}, [color, game]);
 
 	return (
 		<Container fluid center className="centered">

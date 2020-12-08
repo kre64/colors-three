@@ -10,17 +10,31 @@ const Header = ({ game }) => {
 	const [seconds, setSeconds] = useState(0);
 
 	useEffect(() => {
-		const timeout = setInterval(() => {
-			setSeconds((seconds) => seconds + 1);
-			let m = padTime(parseInt(seconds / 60));
-			let s = padTime(seconds % 60);
-			setTime(`${m}:${s}`);
-		}, 1000);
+		if (game) {
+			const timeout = setInterval(() => {
+				setSeconds((seconds) => seconds + 1);
+				let m = padTime(parseInt(seconds / 60));
+				let s = padTime(seconds % 60);
+				setTime(`${m}:${s}`);
+			}, 1000);
+	
+			return () => {
+				clearInterval(timeout);
+			};
+		} else {
+			console.log("game not live")
+		}
+		// const timeout = setInterval(() => {
+		// 	setSeconds((seconds) => seconds + 1);
+		// 	let m = padTime(parseInt(seconds / 60));
+		// 	let s = padTime(seconds % 60);
+		// 	setTime(`${m}:${s}`);
+		// }, 1000);
 
-		return () => {
-			clearInterval(timeout);
-		};
-	}, [seconds, time]);
+		// return () => {
+		// 	clearInterval(timeout);
+		// };
+	}, [seconds, time, game]);
 
 	const padTime = (time) => {
 		let timeString = time + "";
@@ -42,7 +56,7 @@ const Header = ({ game }) => {
 					{game ? <Timer time={time} /> : <Timer time={"⏱"} />}
 				</Col>
 				<Col xs={4}>
-					<Performance seconds={seconds}/>
+					<Performance game={game} seconds={seconds}/>
 				</Col>
 			</Row>
 		</Container>
