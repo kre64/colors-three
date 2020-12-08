@@ -14,15 +14,14 @@ const Performance = ({ game, seconds }) => {
 		7: "🤩",
 		8: "👀",
 		9: "🤯",
-		10: "🔥",
+		10: "💯",
 	};
 
 	useEffect(() => {
 		if (game) {
-			let levelsKey = Math.floor(seconds / 100);
+			let levelsKey = Math.floor(seconds / 60);
 			if (!LEVELS[levelsKey]) {
-				console.log(`Level ${levelsKey} not found in LEVELS!`);
-				setPerformance("placeholder perf");
+				setPerformance("🔥");
 			} else {
 				setPerformance(LEVELS[levelsKey]);
 			}
