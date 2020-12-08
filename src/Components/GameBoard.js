@@ -6,7 +6,7 @@ import Target from "./Target";
 import GameButton from "./GameButton";
 
 const GameBoard = ({ game }) => {
-	const [color, setColor] = useState(1);
+	const [color, setColor] = useState('');
 	const [time, setTime] = useState(3000);
 
 	const COLORS = [0, 1, 2];
@@ -27,15 +27,18 @@ const GameBoard = ({ game }) => {
 	return (
 		<Container fluid center className="centered">
 			<Row>
-				<Col>
-					<GameButton></GameButton>
-				</Col>
-				<Col>
-					<GameButton></GameButton>
-				</Col>
-				<Col>
-					<GameButton></GameButton>
-				</Col>
+				{COLORS.map((n) => {
+					return (
+						<Col key={n}>
+							<GameButton
+								game={game}
+								color={color}
+								id={n}
+								key={n}
+							></GameButton>
+						</Col>
+					);
+				})}
 			</Row>
 			<hr></hr>
 			<Row>

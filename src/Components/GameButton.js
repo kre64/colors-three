@@ -1,7 +1,7 @@
 import React from "react";
 
-const GameButton = (props) => {
-	return <button className="gameButton">GameButton</button>;
+const GameButton = ({ game, color, id, key }) => {
+	return <button className="gameButton">{color === id ? color : ""}</button>;
 };
 
 export default GameButton;
