@@ -6,23 +6,28 @@ import Target from "./Target";
 import GameButton from "./GameButton";
 
 const GameBoard = ({ game }) => {
-	const [color, setColor] = useState('');
+	const [activeColor, setActiveColor] = useState("");
 	const [time, setTime] = useState(3000);
 
 	const COLORS = [0, 1, 2];
+	const DEFAULT_COLOR_MAPPING = {
+		0: "red",
+		1: "green",
+		2: "blue",
+	};
 
 	useEffect(() => {
 		if (game) {
 			const timeout = setInterval(() => {
-				setColor(Math.floor(Math.random() * 3));
-				console.log(color);
+				setActiveColor(Math.floor(Math.random() * 3));
+				console.log(activeColor);
 			}, time);
 
 			return () => {
 				clearInterval(timeout);
 			};
 		}
-	}, [color, game]);
+	}, [activeColor, game]);
 
 	return (
 		<Container fluid className="centered">
@@ -32,8 +37,9 @@ const GameBoard = ({ game }) => {
 						<Col key={n}>
 							<GameButton
 								game={game}
-								color={color}
+								activeColor={activeColor}
 								id={n}
+								defaultColor={DEFAULT_COLOR_MAPPING[n]}
 								gameButtonKey={n}
 							></GameButton>
 						</Col>
@@ -43,7 +49,7 @@ const GameBoard = ({ game }) => {
 			<hr></hr>
 			<Row>
 				<Col style={{ display: "flex", justifyContent: "center" }}>
-					{game ? <Target color={color} /> : ""}
+					{game ? <Target activeColor={activeColor} /> : ""}
 				</Col>
 			</Row>
 		</Container>

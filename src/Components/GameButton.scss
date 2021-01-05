@@ -1,0 +1,42 @@
+$red: tomato;
+$green: mediumseagreen;
+$blue: dodgerblue;
+
+@function saturate-and-lighten($color, $amount) {
+	$output: saturate($color, $amount);
+	$output: lighten($output, $amount);
+	@return $output;
+}
+
+.gameButton{
+    border: none !important;
+    border-radius: 16px;
+}
+
+.red {
+    background-color: $red;
+    border: 2px solid opacify($red, 0.5) !important;
+}
+
+.green {
+	background-color: $green;
+}
+
+.blue {
+	background-color: $blue;
+}
+
+.red-active {
+	background-color: saturate-and-lighten($red, 10%);
+	box-shadow: 0 0 20px saturate-and-lighten($red, 20%);
+}
+
+.green-active {
+	background-color: saturate-and-lighten($green, 10%);
+	box-shadow: 0 0 20px saturate-and-lighten($green, 20%);
+}
+
+.blue-active {
+	background-color: saturate-and-lighten($blue, 10%);
+	box-shadow: 0 0 20px saturate-and-lighten($blue, 20%);
+}

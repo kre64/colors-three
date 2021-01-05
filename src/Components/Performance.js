@@ -4,17 +4,17 @@ const Performance = ({ game, seconds }) => {
 	const [performance, setPerformance] = useState("0");
 
 	const LEVELS = {
-		0: "🐣",
-		1: "😃",
-		2: "😄",
-		3: "😁",
-		4: "😋",
-		5: "😜",
-		6: "🤪",
-		7: "🤩",
-		8: "👀",
-		9: "🤯",
-		10: "💯",
+		0: "Level 1 🐣",
+		1: "Level 2 😃",
+		2: "Level 3 😄",
+		3: "Level 4 😁",
+		4: "Level 5 😋",
+		5: "Level 6 😜",
+		6: "Level 7 🤪",
+		7: "Level 8 🤩",
+		8: "Level 9 👀",
+		9: "Level 10 🤯",
+		10: "Level ??? 💯",
 	};
 
 	useEffect(() => {
