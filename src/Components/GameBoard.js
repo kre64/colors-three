@@ -25,7 +25,7 @@ const GameBoard = ({ game }) => {
 	}, [color, game]);
 
 	return (
-		<Container fluid center className="centered">
+		<Container fluid className="centered">
 			<Row>
 				{COLORS.map((n) => {
 					return (
@@ -34,7 +34,7 @@ const GameBoard = ({ game }) => {
 								game={game}
 								color={color}
 								id={n}
-								key={n}
+								gameButtonKey={n}
 							></GameButton>
 						</Col>
 					);

@@ -35,7 +35,7 @@ const Header = ({ game }) => {
 	};
 
 	return (
-		<Container fluid center className="centered">
+		<Container fluid className="centered">
 			<Row>
 				<Col xs={4}>
 					<span className="highlight-inverted">Colors Three</span>

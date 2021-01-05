@@ -1,6 +1,6 @@
 import React from "react";
 
-const GameButton = ({ game, color, id, key }) => {
+const GameButton = ({ game, color, id, gameButtonKey }) => {
 	return <button className="gameButton">{color === id ? color : ""}</button>;
 };
 
