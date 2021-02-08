@@ -5,24 +5,14 @@ import Container from "react-bootstrap/Container";
 import Row from "react-bootstrap/Row";
 import Col from "react-bootstrap/Col";
 
-const Header = ({ game }) => {
-	const [time, setTime] = useState("");
-	const [seconds, setSeconds] = useState(0);
+const Header = ({ seconds }) => {
+	const [time, setTime] = useState(null);
 
 	useEffect(() => {
-		if (game) {
-			const timeout = setInterval(() => {
-				setSeconds((seconds) => seconds + 1);
-				let m = padTime(parseInt(seconds / 60));
-				let s = padTime(seconds % 60);
-				setTime(`${m}:${s}`);
-			}, 1000);
-	
-			return () => {
-				clearInterval(timeout);
-			};
-		}
-	}, [seconds, time, game]);
+		let m = padTime(parseInt(seconds / 60));
+		let s = padTime(seconds % 60);
+		setTime(`${m}:${s}`);
+	}, [seconds]);
 
 	const padTime = (time) => {
 		let timeString = time + "";
@@ -41,10 +31,10 @@ const Header = ({ game }) => {
 					<span className="highlight-inverted">Colors Three</span>
 				</Col>
 				<Col xs={4}>
-					{game ? <Timer time={time} /> : <Timer time={"⏱"} />}
+					<Timer time={time} />
 				</Col>
 				<Col xs={4}>
-					<Performance game={game} seconds={seconds}/>
+					<Performance seconds={seconds} />
 				</Col>
 			</Row>
 		</Container>
