@@ -1,15 +1,13 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useRef } from "react";
 import Container from "react-bootstrap/Container";
 import Row from "react-bootstrap/Row";
 import Col from "react-bootstrap/Col";
-import Target from "./Target";
 import GameButton from "./GameButton";
 
-const GameBoard = ({ game }) => {
-	const [activeColor, setActiveColor] = useState("");
-	const [time, setTime] = useState(3000);
-
-	const COLORS = [0, 1, 2];
+const INITIAL_THRESHOLD = 3;
+const GameBoard = ({ game, new_threshold, handleGameBtnClick }) => {
+	const [activeColor, setActiveColor] = useState(null);
+	const threshold = useRef(INITIAL_THRESHOLD);
 	const DEFAULT_COLOR_MAPPING = {
 		0: "red",
 		1: "green",
@@ -18,25 +16,27 @@ const GameBoard = ({ game }) => {
 
 	useEffect(() => {
 		if (game) {
-			const timeout = setInterval(() => {
+			if (threshold.current != new_threshold) {
 				setActiveColor(Math.floor(Math.random() * 3));
-				console.log(activeColor);
-			}, time);
-
-			return () => {
-				clearInterval(timeout);
-			};
+				threshold.current = new_threshold;
+			}
+		} else {
+			threshold.current = INITIAL_THRESHOLD;
+			setActiveColor(null);
 		}
-	}, [activeColor, game]);
+	}, [game, new_threshold]);
+
+	const checkBtn = (n) => {
+		handleGameBtnClick(n === activeColor);
+	};
 
 	return (
 		<Container fluid className="centered">
 			<Row>
-				{COLORS.map((n) => {
+				{[0, 1, 2].map((n) => {
 					return (
-						<Col key={n}>
+						<Col key={n} onClick={() => checkBtn(n)}>
 							<GameButton
-								game={game}
 								activeColor={activeColor}
 								id={n}
 								defaultColor={DEFAULT_COLOR_MAPPING[n]}
@@ -45,12 +45,6 @@ const GameBoard = ({ game }) => {
 						</Col>
 					);
 				})}
-			</Row>
-			<hr></hr>
-			<Row>
-				<Col style={{ display: "flex", justifyContent: "center" }}>
-					{game ? <Target activeColor={activeColor} /> : ""}
-				</Col>
 			</Row>
 		</Container>
 	);
